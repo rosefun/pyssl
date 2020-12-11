@@ -74,6 +74,7 @@ import numpy as np
 from sklearn import datasets
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
+from semisupervised.TSVM import S3VM
 
 # normalization
 def normalize(x):
@@ -97,10 +98,7 @@ def get_data():
 
 label_X_train, label_y_train, unlabel_X_train, unlabel_y, X_test, y_test = get_data()
 
-# import 
-from semisupervised import S3SVM
-
-model = S3SVM()
+model = S3VM()
 model.fit(np.vstack((label_X_train, unlabel_X_train)), np.append(label_y_train, unlabel_y))
 # predict
 predict = model.predict(X_test)
