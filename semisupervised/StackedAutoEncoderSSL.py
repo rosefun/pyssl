@@ -16,12 +16,12 @@ class StackedAutoEncoderClassifier(BaseEstimator):
                  pretrain_batch_size=256, finetune_batch_size=256, pretrain_optimizer=None,
                  finetune_optimizer=None, patience=40,
                  device_name="auto", verbose=1, save_pretrain_model=False):
-        if device_name == 'auto':
+        if device_name == 'auto' or not device_name:
             if torch.cuda.is_available():
                 device_name = 'cuda'
             else:
                 device_name = 'cpu'
-        self.device = torch.device(device_name if device_name else 'cpu') # duct-tape solution to unexpected device_name == None
+        self.device = torch.device(device_name)
         if verbose:
             print("Info:", f"Device used : {self.device}")
 
