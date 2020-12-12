@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+import pandas as pd
 import torch
 from torch.autograd import Variable
 from torch import nn
@@ -48,7 +49,7 @@ class StackedAutoEncoderClassifier(BaseEstimator):
         self.finetune_loss = nn.CrossEntropyLoss()
 
     def create_dataloader(self, X, y=None, batch_size=256, shuffle=False, device="cuda"):
-        X = torch.tensor(X.values if hasattr(X, 'values') else X, dtype=torch.float).to(self.device)
+        X = torch.tensor(X.values if isinstance(X, pd.DataFrame) else X, dtype=torch.float).to(self.device)
         if y is not None:
             y = torch.tensor(y, dtype=torch.float).to(self.device)
             tensor_data = TensorDataset(X, y)
