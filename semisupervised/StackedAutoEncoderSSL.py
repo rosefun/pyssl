@@ -17,6 +17,8 @@ class StackedAutoEncoderClassifier(BaseEstimator):
                  pretrain_batch_size=256, finetune_batch_size=256, pretrain_optimizer=None,
                  finetune_optimizer=None, patience=40,
                  device_name="auto", verbose=1, save_pretrain_model=False):
+        self._estimator_type = "classifier"
+        self.classes_ = None
         if device_name == 'auto' or not device_name:
             if torch.cuda.is_available():
                 device_name = 'cuda'
@@ -84,6 +86,7 @@ class StackedAutoEncoderClassifier(BaseEstimator):
         unlabeledX = X[y == -1].values
         labeledX = X[y != -1].values
         nclass = np.max(y) + 1
+        self.classes_ = sorted(y[y != -1].unique())
         labeled_y = y[y != -1]
         if labeled_y.ndim == 1:
             labeled_y = self.onehot(labeled_y)
