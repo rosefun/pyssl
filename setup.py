@@ -41,6 +41,7 @@ install_requires = [
 	'pandas',
 	'sklearn',
 	'keras',
+	'torch',
 ]
 
 	
