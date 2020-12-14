@@ -38,11 +38,14 @@ classifiers = [
 
 install_requires = [
 	'numpy',
-	'pandas',
 	'sklearn',
 	'keras',
-	'torch',
+	'pandas',
 ]
+
+extras_require = {
+	'StackedAutoEncoderSSL': 'torch'
+}
 
 	
 setup(
