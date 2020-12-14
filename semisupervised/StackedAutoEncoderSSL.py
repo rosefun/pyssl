@@ -155,12 +155,12 @@ class StackedAutoEncoderClassifier(BaseEstimator):
                     min_loss = valid_loss
                 else:
                     patience_counter += 1
-                if self.verbose:
+                if ep % self.verbose == 0:
                     print("Info: epoch:{}, loss:{:.4}, valid_loss:{:.4}".format(ep, e_loss, valid_loss))
                 if patience_counter >= self.patience:
                     break
             else:
-                if self.verbose:
+                if ep % self.verbose == 0:
                     print("Info: epoch:{},loss:{:.4}".format(ep, e_loss))
 
     def predict_epoch(self, valid_loader):
